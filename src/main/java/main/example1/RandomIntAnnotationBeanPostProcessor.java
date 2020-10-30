@@ -16,7 +16,6 @@ public class RandomIntAnnotationBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-//        System.out.println("o Обработка через " + this.getClass().getSimpleName());
         System.out.println("\t* Before. Бин: " + beanName + ", класс: " + bean.getClass());
         Field[] fields = bean.getClass().getDeclaredFields();
         for(Field field : fields) {
@@ -33,7 +32,6 @@ public class RandomIntAnnotationBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-//        System.out.println("o Обработка через " + this.getClass().getSimpleName());
         System.out.println("\t* After. Бин: " + beanName + ", класс: " + bean.getClass());
         return bean;
     }
