@@ -1,5 +1,6 @@
 package main.selfautowired;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,26 +11,40 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {main.selfautowired.Config.class})
-public class AppTest {
+public class SelfAutowiredTest {
 
     @Autowired
     private ApplicationContext context;
 
+    @After
+    public void after() {
+        System.out.println("*".repeat(50));
+    }
+
     @Test
     public void contextNotNull() {
+        title("Context not null");
         Assert.assertNotNull(context);
     }
 
     @Test
     public void beanExists() {
-        MyBean myBean = context.getBean(MyBean.class);
-        Assert.assertNotNull(myBean);
+        title("MyBean not null");
+        Assert.assertNotNull(context.getBean(MyBean.class));
     }
 
     @Test
     public void selfAutowiredIsWorked() {
+
+        title("@SelfAutowired is worked");
         MyBean myBean = context.getBean(MyBean.class);
         Assert.assertNotNull(myBean.getMyBean1());
         Assert.assertNull(myBean.getMyBean2());
+    }
+
+    private void title(String text) {
+        String format = "%s %s %s";
+        System.out.println(String.format(format,
+                "*".repeat(10), text, "*".repeat(10)));
     }
 }
