@@ -10,7 +10,7 @@ import javax.annotation.PreDestroy;
 @Scope("prototype")
 public class Tea {
     public Tea() {
-        System.out.println("о Создаётся бин tea (@Component): аннотация @PreDestroy указана над методом");
+        System.out.println("о Создаётся бин tea (@Component): аннотация @PreDestroy указана над методом, над классом нет @PreDestroyClass");
     }
 
     @PostConstruct

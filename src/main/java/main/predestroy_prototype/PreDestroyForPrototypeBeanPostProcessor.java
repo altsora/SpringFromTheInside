@@ -16,9 +16,11 @@ public class PreDestroyForPrototypeBeanPostProcessor implements BeanPostProcesso
 
     /**
      * Before-обработка бинов. Если бин prototype, то определяем, известно ли о его destroy-методе.
-     * При парсе XML-файла destroy-метод по умолчанию равен null (проходимся по методам и ищем аннотацию,
-     * маркирующую destroy-метод;
-     * При парсе
+     * При парсе с помощью XML-файла destroy-метод по умолчанию равен null, но можно указать явно с помощью атрибута тега.
+     * При парсе с помощью ComponentScan destroy-метод равен null; без кастомной аннотации в BeanDefinition нельзя передать
+     * информацию о destroy-методе.
+     * При парсе с помощью JavaConfig destroy-метод по умолчанию равен (inferred) (строка). Можно указать явно, передав
+     * название метода в соответствующий параметр в @Bean.
      */
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {

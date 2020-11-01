@@ -16,12 +16,6 @@ public class Config {
     }
 
     @Bean
-    public static MyBeanFactoryPostProcessor myBeanFactoryPostProcessor() {
-        System.out.println("о Создаётся бин beanFactoryPostProcessor (Config)");
-        return new MyBeanFactoryPostProcessor();
-    }
-
-    @Bean
     public static PreDestroyForPrototypeBeanPostProcessor preDestroyForPrototypeBeanPostProcessor() {
         System.out.println("о Создаётся бин preDestroyForPrototypeBeanPostProcessor (Config)");
         return new PreDestroyForPrototypeBeanPostProcessor();
@@ -36,7 +30,7 @@ public class Config {
     @Bean
     @Scope("prototype")
     public Coffee coffee() {
-        System.out.println("о Создаётся бин coffee (Config): стоит аннотация @PreDestroy в классе");
+        System.out.println("о Создаётся бин coffee (Config): стоит аннотация @PreDestroy над методом");
         return new Coffee();
     }
 
@@ -50,7 +44,7 @@ public class Config {
     @Bean
     @Scope("singleton")
     public CoffeeMachine coffeeMachine() {
-        System.out.println("о Создаётся бин coffeeMachine (Config): стоит аннотация @PreDestroy в классе");
+        System.out.println("о Создаётся бин coffeeMachine (Config): стоит аннотация @PreDestroy над методом");
         return new CoffeeMachine();
     }
 

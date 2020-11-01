@@ -12,10 +12,20 @@ public class PreDestroyAnnotationBeanFactoryPostProcessor implements BeanFactory
     /**
      * Обработка собственной аннотации @PreDestroyClass над классом, которая в качестве параметра принимает
      * имя метода, который должен стать destroy-методом.
+     * <p>
+     * В зависимости от способа парса конфигурации (XML, JavaConfig или ComponentScan) в BeanDefinition либо будет информация
+     * о классе бина, либо нет. В XML класс явно указывается при объявлении бина и, соответственно, его можно получить;
+     * при @Component класс тоже можно получить. А вот при создании бина через @Bean информация о классе недоступна сразу,
+     * поэтому стоит try-catch конструкция.
+     *
      * @see PreDestroyClass
      */
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory factory) throws BeansException {
+        System.out.println(" ~ Созданные BeanDefinition (их имена):");
+        for (int i = 0; i < factory.getBeanDefinitionNames().length; i++) {
+            System.out.println("\t" + (i + 1) + ".\t" + factory.getBeanDefinitionNames()[i]);
+        }
         System.out.println(" ~ Ищем классы, помеченные @PreDestroyClass");
         String[] beanDefinitionNames = factory.getBeanDefinitionNames();
         for (String beanDefinitionName : beanDefinitionNames) {
@@ -31,8 +41,8 @@ public class PreDestroyAnnotationBeanFactoryPostProcessor implements BeanFactory
                     beanDefinition.setDestroyMethodName(destroyMethod.getName());
                 }
             } catch (ClassNotFoundException | NullPointerException e) {
-                System.out.println("\t\t- Нет данных о классе " + null + " для " + beanDefinitionName + "" +
-                        ", т.к. (известно на момент написания) бин создаётся через JavaConfig, а там до создания бина " +
+                System.out.println("\t\t- Нет данных о классе для бина " + beanDefinitionName +
+                        ", т.к. бин создаётся через JavaConfig, а там до создания бина " +
                         "нельзя узнать про класс бина");
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
