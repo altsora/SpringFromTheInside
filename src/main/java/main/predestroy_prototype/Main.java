@@ -10,6 +10,7 @@ public class Main {
         context.getBean(Water.class);
         context.getBean(Milk.class);
         context.getBean(Lemonade.class);
+        context.getBean(Juice.class);
         context.getBean(CoffeeMachine.class);
     }
 }

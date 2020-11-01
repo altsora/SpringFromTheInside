@@ -3,6 +3,7 @@ package main.predestroy_prototype;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+//@PreDestroyClass(destroyMethod = "lemonadeDestroy")   //Работает
 public class Lemonade {
     public Lemonade() {
         System.out.println("о Создаётся бин lemonade (XML): стоит аннотация @PreDestroy");
@@ -14,7 +15,7 @@ public class Lemonade {
     }
 
     @PreDestroy
-    public void waterDestroy() {
+    public void lemonadeDestroy() {
         System.out.println("x Дестрой " + this.getClass().getSimpleName());
     }
 }

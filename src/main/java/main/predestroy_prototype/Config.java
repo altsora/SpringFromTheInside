@@ -28,6 +28,12 @@ public class Config {
     }
 
     @Bean
+    public static PreDestroyAnnotationBeanFactoryPostProcessor preDestroyAnnotationBeanFactoryPostProcessor() {
+        System.out.println("о Создаётся бин preDestroyAnnotationBeanFactoryPostProcessor (Config)");
+        return new PreDestroyAnnotationBeanFactoryPostProcessor();
+    }
+
+    @Bean
     @Scope("prototype")
     public Coffee coffee() {
         System.out.println("о Создаётся бин coffee (Config): стоит аннотация @PreDestroy в классе");
