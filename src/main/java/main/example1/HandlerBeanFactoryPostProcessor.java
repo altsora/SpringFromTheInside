@@ -22,7 +22,8 @@ public class HandlerBeanFactoryPostProcessor implements BeanFactoryPostProcessor
         System.out.println("Внедрение зависимости в BeanFactoryPostProcessor: color = " + color);
         System.out.println("Созданные BeanDefinition: ");
         for (int i = 0; i < beanFactory.getBeanDefinitionNames().length; i++) {
-            System.out.println("\t" + (i + 1) + ".\t" + beanFactory.getBeanDefinitionNames()[i]);
+            String beanName = beanFactory.getBeanDefinitionNames()[i];
+            System.out.println("\t" + (i + 1) + ".\t" + beanName);
         }
     }
 }

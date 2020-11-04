@@ -27,6 +27,7 @@ public class PreDestroyForPrototypeBeanPostProcessor implements BeanPostProcesso
         System.out.println("\t* Before. Бин: " + beanName + ", класс: " + bean.getClass().getSimpleName());
         AbstractBeanDefinition beanDefinition = (AbstractBeanDefinition) factory.getBeanDefinition(beanName);
         if (beanDefinition.isPrototype()) {
+            System.out.println("\t  Init-метод:    " + beanDefinition.getInitMethodName());
             System.out.println("\t  Destroy-метод: " + beanDefinition.getDestroyMethodName());
             if (beanDefinition.getDestroyMethodName() != null) {
                 printWarning(beanName);
